@@ -1,5 +1,6 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const dotenv = require('dotenv').config()
 const session = require('express-session');
 const Redis = require("redis");
 const {RedisStore} = require("connect-redis");
@@ -22,7 +23,7 @@ router.use(
   session({
     store: redisStore,
     name: "_sid",
-    secret: process.env.SESSION_SECRET || "test",
+    secret: process.env.SESSION_SECRET || "localSecretExample",
     resave: false,
     cookie: { secure: false, maxAge: 60000 }, // Set to secure:false and expire in 1 minute for demo purposes
     saveUninitialized: false,
