@@ -6,10 +6,12 @@ router.use(express.json());
 router
   .route("/session")
   .post(async (req, res) => {
-    
-  })
-  .get((req, res) => {
    
+  })
+  .get(async (req, res) => {
+  
+    
+    res.send("sucess")
    
   })
   .delete(async (req, res) => {
