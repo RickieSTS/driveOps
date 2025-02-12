@@ -6,15 +6,15 @@ const Redis = require("redis");
 const { RedisStore } = require("connect-redis");
 
 const redisClient = Redis.createClient({
-  url: "redis://redis:6379",
-  host: "localhost",
+  host: "127.0.0.1",
+  port: 6379,
 });
 
 redisClient.connect().catch(console.error);
 
 let redisStore = new RedisStore({
   client: redisClient,
-  host: "localhost",
+  host: "127.0.0.1",
   port: 6379,
 });
 
