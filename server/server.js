@@ -1,11 +1,14 @@
 const dotenv = require('dotenv').config()
 const express = require("express");
+const helmet = require('helmet')
 const https = require("https")
 const path = require("path")
 const fs = require("fs")
 const app = express();
 
 const PORT = process.env.PORT_HTTPS || 3001;
+
+app.use(helmet())
 
 const tlsServer = https.createServer({
   key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
