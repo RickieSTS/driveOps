@@ -2,8 +2,15 @@ const express = require("express");
 const router = express.Router();
 const dotenv = require("dotenv").config();
 const session = require("express-session");
+const cors = require("cors");
 const Redis = require("redis");
 const { RedisStore } = require("connect-redis");
+
+router.use(cors({
+  origin: "http://localhost:3000",
+  exposedHeaders: ["SET-COOKIE"],
+  credentials: true
+}))
 
 const redisClient = Redis.createClient({
   host: "127.0.0.1",
@@ -26,8 +33,8 @@ router.use(
     resave: false,
     cookie: {
       secure: process.env.COOKIE_SECURE || true,
-      maxAge: 1000 * 60 * 30,
-      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+     
     },
     saveUninitialized: false,
   })

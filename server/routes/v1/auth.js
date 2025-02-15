@@ -5,9 +5,8 @@ router.use(express.json());
 
 const sessionChecker = ((req,res,next)=>{
   if(!req.session || !req.session.uid){
-    const err = new Error("not logged in")
-    err.statusCode = 401
-    next(err)
+       next(res.status(400).json({error:"Not logged in"}))
+      
   }
   next();
 })
@@ -18,11 +17,12 @@ router
    const {email, password} = req.body
 
    req.session.uid="1234"
-   res.json({ok:"success"})
+   res.status(200).json({ok:"success"})
 
   })
   .get(sessionChecker,async (req, res) => {
-  
+    console.log(("get"));
+    
     
     res.send(req.session)
    
