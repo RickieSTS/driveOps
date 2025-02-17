@@ -5,6 +5,7 @@ const session = require("express-session");
 const cors = require("cors");
 const Redis = require("redis");
 const { RedisStore } = require("connect-redis");
+const Joi = require('joi');
 
 router.use(cors({
   origin: "http://localhost:3000",
@@ -34,7 +35,7 @@ router.use(
     cookie: {
       secure: process.env.COOKIE_SECURE || true,
       maxAge: 1000 * 60 * 60 * 24 * 30,
-     
+
     },
     saveUninitialized: false,
   })
