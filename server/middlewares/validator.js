@@ -1,14 +1,21 @@
 const Joi = require('joi');
 const ApiError = require('../helpers/errors');
 
-const validator = (schema) => (req, res, next) => {
+const validator = (validationData) => (req, res, next) => {
 
-    const { error } = schema.validate(req.body, { abortEarly: false })
+    const value = validationData.value(req);
+    const { error } = validationData.schema.validate(value, { abortEarly: false })
 
     if (error) {
-        throw new ApiError(error.name, error.message, error.details, 422);
+        
+        throw new ApiError(
+            validationData.status.message,
+            error.message,
+            validationData.details || error.details,
+            validationData.status.code
+        );
     }
-    console.log("validator sucess");
+
     next()
 }
 

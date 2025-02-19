@@ -29,7 +29,7 @@ let redisStore = new RedisStore({
 router.use(
   session({
     store: redisStore,
-    name: "_sid",
+    name: "_driveOps_session",
     secret: process.env.SESSION_SECRET || "localSecretExample",
     resave: false,
     cookie: {
